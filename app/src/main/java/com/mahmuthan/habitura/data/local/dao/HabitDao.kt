@@ -14,7 +14,7 @@ interface HabitDao {
     fun observeActiveHabits(): Flow<List<HabitEntity>>
 
     @Query("SELECT * FROM habits WHERE id = :id LIMIT 1")
-    suspend fun getById(id: Long): HabitEntity?
+    suspend fun getById(id: Int): HabitEntity?
 
     @Query("SELECT * FROM habits")
     suspend fun getAllOnce(): List<HabitEntity>

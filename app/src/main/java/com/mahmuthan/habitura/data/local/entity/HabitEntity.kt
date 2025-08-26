@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
  */
 @Entity(tableName = "habits")
 data class HabitEntity(
-    @PrimaryKey(autoGenerate = true) val id: Long = 0L,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val title: String,
     val description: String? = null,
     val colorArgb: Int = 0xFF4CAF50.toInt(), // varsayılan yeşil
