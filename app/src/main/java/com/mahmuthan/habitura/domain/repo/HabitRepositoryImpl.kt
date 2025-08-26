@@ -1,29 +1,40 @@
 package com.mahmuthan.habitura.data.repo
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.mahmuthan.habitura.data.local.dao.HabitDao
 import com.mahmuthan.habitura.data.local.entity.HabitEntity
+import com.mahmuthan.habitura.data.mapper.toDomain
+import com.mahmuthan.habitura.data.mapper.toEntity
 import com.mahmuthan.habitura.domain.model.Habit
 import com.mahmuthan.habitura.domain.repo.HabitRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-
+@RequiresApi(Build.VERSION_CODES.O)
 class HabitRepositoryImpl(
     private val dao: HabitDao
 ) : HabitRepository {
 
     override fun getHabits(): Flow<List<Habit>> {
-        return dao.getHabits().map { list -> list.map { it.toDomain() } }
+        return dao.observeActiveHabits().map { entities ->
+            entities.map { it.toDomain() }
+        }
     }
 
     override suspend fun getHabitById(id: Int): Habit? {
-        return dao.getHabitById(id)?.toDomain()
+        return dao.getById(id)?.toDomain()
     }
 
+
     override suspend fun insertHabit(habit: Habit) {
-        dao.insertHabit(HabitEntity.fromDomain(habit))
+        dao.insert(habit.toEntity())
+    }
+
+    override suspend fun updateHabit(habit: Habit) {
+        dao.update(habit.toEntity())
     }
 
     override suspend fun deleteHabit(habit: Habit) {
-        dao.deleteHabit(HabitEntity.fromDomain(habit))
+        dao.delete(habit.toEntity())
     }
 }
