@@ -10,7 +10,6 @@ import com.mahmuthan.habitura.domain.model.Habit
 import com.mahmuthan.habitura.domain.repo.HabitRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-@RequiresApi(Build.VERSION_CODES.O)
 class HabitRepositoryImpl(
     private val dao: HabitDao
 ) : HabitRepository {
