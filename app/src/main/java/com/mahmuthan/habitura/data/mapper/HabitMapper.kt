@@ -9,7 +9,6 @@ import java.time.LocalDate
 
 // ---- Bit mask <-> Set<DayOfWeek> ----
 // Maske bitleri: 0=MONDAY ... 6=SUNDAY
-@RequiresApi(Build.VERSION_CODES.O)
 private fun Int.toDayOfWeekSet(): Set<DayOfWeek> {
     val out = mutableSetOf<DayOfWeek>()
     DayOfWeek.values().forEach { day ->
@@ -26,7 +25,6 @@ private fun Set<DayOfWeek>.toMask(): Int {
 }
 
 // ---- Entity -> Domain ----
-@RequiresApi(Build.VERSION_CODES.O)
 fun HabitEntity.toDomain(): Habit = Habit(
     id = id,
     title = title,
@@ -38,7 +36,6 @@ fun HabitEntity.toDomain(): Habit = Habit(
 )
 
 // ---- Domain -> Entity ----
-@RequiresApi(Build.VERSION_CODES.O)
 fun Habit.toEntity(): HabitEntity = HabitEntity(
     id = id,
     title = title,
