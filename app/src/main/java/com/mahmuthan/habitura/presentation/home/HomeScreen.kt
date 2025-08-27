@@ -4,6 +4,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -11,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mahmuthan.habitura.domain.model.Habit
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(viewModel: HomeViewModel) {
     val habitList = viewModel.habits.collectAsState().value
@@ -42,7 +46,7 @@ fun HomeScreen(viewModel: HomeViewModel) {
 @Composable
 fun HabitItem(habit: Habit, onDelete: (Habit) -> Unit) {
     Card(
-        elevation = 4.dp,
+        elevation = CardDefaults.cardElevation(4.dp),
         modifier = Modifier.fillMaxWidth()
     ) {
         Row(
@@ -51,8 +55,8 @@ fun HabitItem(habit: Habit, onDelete: (Habit) -> Unit) {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Column {
-                Text(text = habit.title, style = MaterialTheme.typography.h6)
-                habit.description?.let { Text(text = it, style = MaterialTheme.typography.body2) }
+                Text(text = habit.title, style = MaterialTheme.typography.titleLarge)
+                habit.description?.let { Text(text = it, style = MaterialTheme.typography.bodySmall) }
             }
             IconButton(onClick = { onDelete(habit) }) {
                 Icon(Icons.Default.Delete, contentDescription = "Delete Habit")
