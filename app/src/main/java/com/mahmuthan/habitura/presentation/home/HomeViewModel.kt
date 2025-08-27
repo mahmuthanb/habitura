@@ -6,13 +6,16 @@ import com.mahmuthan.habitura.domain.model.Habit
 import com.mahmuthan.habitura.domain.usecase.DeleteHabitUseCase
 import com.mahmuthan.habitura.domain.usecase.GetHabitsUseCase
 import com.mahmuthan.habitura.domain.usecase.InsertHabitUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class HomeViewModel(
+@HiltViewModel
+class HomeViewModel @Inject constructor(
     getHabitsUseCase: GetHabitsUseCase,
     private val insertHabitUseCase: InsertHabitUseCase,
     private val deleteHabitUseCase: DeleteHabitUseCase
