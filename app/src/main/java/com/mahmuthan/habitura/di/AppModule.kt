@@ -18,40 +18,10 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-//    @Provides
-//    @Singleton
-//    fun provideDatabase(app: Context): HabituraDatabase {
-//        return Room.databaseBuilder(
-//            app,
-//            HabituraDatabase::class.java,
-//            "habit_db"
-//        ).build()
-//    }
-
-//    @Provides
-//    fun provideHabitDao(db: HabituraDatabase) = db.habitDao()
-
-    @RequiresApi(Build.VERSION_CODES.O)
     @Provides
     @Singleton
     fun provideHabitRepository(dao: com.mahmuthan.habitura.data.local.dao.HabitDao): HabitRepository {
         return HabitRepositoryImpl(dao)
     }
 
-    @Provides
-    fun provideUseCases(repository: HabitRepository): HabitUseCases {
-        return HabitUseCases(
-            getHabits = GetHabitsUseCase(repository),
-            getHabitById = GetHabitByIdUseCase(repository),
-            insertHabit = InsertHabitUseCase(repository),
-            deleteHabit = DeleteHabitUseCase(repository)
-        )
-    }
 }
-
-data class HabitUseCases(
-    val getHabits: GetHabitsUseCase,
-    val getHabitById: GetHabitByIdUseCase,
-    val insertHabit: InsertHabitUseCase,
-    val deleteHabit: DeleteHabitUseCase
-)
