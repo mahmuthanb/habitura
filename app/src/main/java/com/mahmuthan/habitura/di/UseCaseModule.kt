@@ -23,3 +23,10 @@ object UseCaseModule {
         )
     }
 }
+
+data class HabitUseCases(
+    val getHabits: GetHabitsUseCase,
+    val getHabitById: GetHabitByIdUseCase,
+    val insertHabit: InsertHabitUseCase,
+    val deleteHabit: DeleteHabitUseCase
+)
