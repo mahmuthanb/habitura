@@ -12,11 +12,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mahmuthan.habitura.domain.model.Habit
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(viewModel: HomeViewModel) {
+fun HomeScreen(viewModel: HomeViewModel,onAddHabitClick:()-> Unit) {
     val habitList = viewModel.habits.collectAsState().value
 
     Scaffold(
@@ -24,7 +26,7 @@ fun HomeScreen(viewModel: HomeViewModel) {
             TopAppBar(title = { Text("Habitura") })
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = { /* TODO: Navigate to AddHabitScreen */ }) {
+            FloatingActionButton(onClick = onAddHabitClick) {
                 Text("+")
             }
         }
